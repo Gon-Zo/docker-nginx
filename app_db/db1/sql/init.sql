@@ -4,8 +4,11 @@ create SCHEMA WEBFLUX;
 
 CREATE TABLE WEBFLUX.item
 (
-    id   INT          NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
+    id         INT            NOT NULL AUTO_INCREMENT,
+    name       VARCHAR(255)   NOT NULL,
+    type       VARBINARY(255) null,
+    count      bigint         null,
+    created_at BIGINT(19)       null,
     CONSTRAINT item_pk PRIMARY KEY (id)
 );
 
@@ -2071,7 +2074,7 @@ create table user.users
     role       integer      not null,
     user_key   varchar(255) not null,
     primary key (id)
-) engine=InnoDB
+) engine = InnoDB
 ;
 
 insert into user.users (email, login_type, name, role, user_key)
