@@ -4,11 +4,12 @@ create SCHEMA WEBFLUX;
 
 CREATE TABLE WEBFLUX.item
 (
-    id         INT            NOT NULL AUTO_INCREMENT,
-    name       VARCHAR(255)   NOT NULL,
-    type       VARBINARY(255) null,
-    count      bigint         null,
-    created_at BIGINT(19)       null,
+    id          INT            NOT NULL AUTO_INCREMENT,
+    name        VARCHAR(255)   NOT NULL,
+    type        VARBINARY(255) null,
+    count       bigint         null,
+    limit_count bigint         null,
+    created_at  BIGINT(19)     null,
     CONSTRAINT item_pk PRIMARY KEY (id)
 );
 
