@@ -1,0 +1,10 @@
+2022-10-16T02:24:20.919  WARN --- [-functhread3] hypercorn.error            : ASGI Framework Lifespan error, continuing without Lifespan support
+2022-10-16T02:24:20.919  WARN --- [-functhread3] hypercorn.error            : ASGI Framework Lifespan error, continuing without Lifespan support
+2022-10-16T02:24:20.924  INFO --- [-functhread3] hypercorn.error            : Running on https://0.0.0.0:4566 (CTRL + C to quit)
+2022-10-16T02:24:20.924  INFO --- [-functhread3] hypercorn.error            : Running on https://0.0.0.0:4566 (CTRL + C to quit)
+2022-10-16T02:24:56.020  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS sqs.CreateQueue => 200
+2022-10-16T02:25:08.339  INFO --- [   asgi_gw_0] localstack.request.http    : GET /000000000000/testQueue => 404
+2022-10-16T02:25:08.388  INFO --- [functhread17] l.services.motoserver      : starting moto server on http://0.0.0.0:54169
+2022-10-16T02:25:08.390  INFO --- [   asgi_gw_0] localstack.services.infra  : Starting mock S3 service on http port 4566 ...
+2022-10-16T02:25:08.470  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS s3.ListObjects => 404 (404)
+2022-10-16T02:28:24.914  INFO --- [   asgi_gw_0] localstack.request.http    : GET / => 200

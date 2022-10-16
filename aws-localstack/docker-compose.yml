@@ -1,58 +1,20 @@
-version: '3.3'
-
-# Note: localstack 0.11.0 부터는 모든 APIs 단위 포인트(http://localhost:4566)로 연결을 됨
-# API Gateway at http://localhost:4567
-# Kinesis at http://localhost:4568
-# DynamoDB at http://localhost:4569
-# DynamoDB Streams at http://localhost:4570
-# S3 at http://localhost:4572
-# Firehose at http://localhost:4573
-# Lambda at http://localhost:4574
-# SNS at http://localhost:4575
-# SQS at http://localhost:4576
-# Redshift at http://localhost:4577
-# Elasticsearch Service at http://localhost:4578
-# SES at http://localhost:4579
-# Route53 at http://localhost:4580
-# CloudFormation at http://localhost:4581
-# CloudWatch at http://localhost:4582
-# SSM at http://localhost:4583
-# SecretsManager at http://localhost:4584
-# StepFunctions at http://localhost:4585
-# CloudWatch Logs at http://localhost:4586
-# EventBridge (CloudWatch Events) at http://localhost:4587
-# STS at http://localhost:4592
-# IAM at http://localhost:4593
-# EC2 at http://localhost:4597
-# KMS at http://localhost:4599
-# ACM at http://localhost:4619
+version: "3.8"
 
 services:
   localstack:
-    image: localstack/localstack:0.11.3
-    privileged: true
+    container_name: "${LOCALSTACK_DOCKER_NAME-localstack_main}"
+    image: localstack/localstack:latest-arm64
     ports:
-      - 8081:8080   # localstack webservice -> change to webservice port to 8081 (http://0.0.0.0:8080/#!/infra)
-      - 4567:4567   # apigateway
-      #- 4568:4568  # kinesis
-      #- 4569:4569   # dynamodb
-      #- 4570:4570  # dynamodbstreams
-      #- 4571:4571  # elasticache
-      - 4572:4572   # s3
-      #- 4573:4573  # firehose
-      - 4574:4574   # lambda
-      - 4597:4597   # ec2
+      - "127.0.0.1:4566:4566"            # LocalStack Gateway
+      - "127.0.0.1:4510-4559:4510-4559"  # external services port range
     environment:
-      - DATA_DIR=/tmp/localstack/data
-      - DEBUG=1
-      - DEFAULT_REGION=ap-southeast-2
+      - DEBUG=${DEBUG-}
+      - PERSISTENCE=${PERSISTENCE-}
+      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-}
       - DOCKER_HOST=unix:///var/run/docker.sock
-      - LAMBDA_EXECUTOR=docker-reuse
-      - PORT_WEB_UI=8080
-      - SERVICES=s3,lambda,dynamodb,ec2
-      - HOSTNAME=localstack
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=testUser
+      - AWS_SECRET_ACCESS_KEY=testAccessKey
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./volumes:/tmp/localstack/data
-volumes:
-  localstack:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
